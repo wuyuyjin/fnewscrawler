@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: fnewscrawler
+    env: docker
+    dockerfilePath: ./docker/Dockerfile
+    dockerContext: .
+    plan: free
+    region: singapore
+    healthCheckPath: /api/monitor/overview
+    envVars:
+      - key: WEB_HOST
+        value: 0.0.0.0
+      - key: WEB_PORT
+        value: 8480
+      - key: REDIS_HOST
+        value: localhost
+      - key: REDIS_PORT
+        value: 6379
+      - key: MCP_SERVER_TYPE
+        value: http
+      - key: PW_USE_HEADLESS
+        value: true
+      - key: PW_CONTEXT_MAX_IDLE_TIME
+        value: 3600
+      - key: PW_CONTEXT_HEALTH_CHECK_TIME
+        value: 300
+

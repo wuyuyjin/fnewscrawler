@@ -1,0 +1,135 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fnewscrawler"
+version = "1.0.0"
+description = "Financial news and data crawler with MCP protocol support"
+authors = [
+    {name = "noimank", email = "noimank@163.com"},
+]
+dependencies = [
+    "playwright",
+    "httpx",
+    "loguru",
+    "crawl4ai",
+    "redis",
+    "fastapi",
+    "uvicorn[standard]",
+    "jinja2",
+    "python-multipart",
+    "aiofiles",
+    "fastmcp",
+    "tabulate",
+    "fake-useragent",
+    "pandas",
+    "html5lib",
+    "tushare",
+    "TA-Lib",
+    "sentence-transformers",
+    "scikit-learn",
+    "tqdm",
+    "akshare",
+    "pytest-asyncio",
+    "anyio",
+    "pytest-tornasync",
+    "pytest-trio",
+    "pytest-twisted",
+    "twisted",
+    "service_identity",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["finance", "news", "crawler", "mcp", "fastapi"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "black",
+    "ruff",
+    "mypy",
+]
+
+[project.urls]
+Homepage = "https://github.com/noimank/FNewsCrawler"
+Repository = "https://github.com/noimank/FNewsCrawler"
+Documentation = "https://github.com/noimank/FNewsCrawler/blob/main/README.md"
+"Bug Tracker" = "https://github.com/noimank/FNewsCrawler/issues"
+
+[project.scripts]
+fnewscrawler = "main:main"
+
+[tool.hatch.version]
+path = "pyproject.toml"
+
+[tool.hatch.build.targets.wheel]
+packages = ["fnewscrawler", "web"]
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "UP", # pyupgrade
+    "B",  # flake8-bugbear
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["test"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
