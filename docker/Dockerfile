@@ -1,4 +1,4 @@
-FROM noimankdocker/fnewscrawler:dev
+FROM wuyuyjin/fnewscrawler:dev
 
 # 设置工作目录
 WORKDIR /app

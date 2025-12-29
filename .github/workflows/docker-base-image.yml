@@ -33,4 +33,4 @@ jobs:
           context: .
           file: docker/Dockerfile-base
           push: true
-          tags: noimankdocker/fnewscrawler:dev
+          tags: wuyuyjin/fnewscrawler:dev
