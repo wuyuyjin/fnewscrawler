@@ -25,7 +25,7 @@ ENV LOG_FILE_PATH=/app/FNewsCrawler.log
 EXPOSE 8480
 
 # 启动脚本
-COPY docker/start.sh /app/start.sh
+# COPY docker/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
 # 健康检查
